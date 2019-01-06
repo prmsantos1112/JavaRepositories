@@ -18,10 +18,12 @@ public class ProgramPolimorfismo {
 		Account polimorf_1 = new Account(1020, "Paulo Ricardo", 1000.0);
 		Account polimorf_2 = new SavingsAccountSobrePosicao(1023, "Maria", 1000.0, 0.01);
 		
+		     // Variáveis com comportamentos diferentes;
+		
 		polimorf_1.withdraw(50.0); 
 		polimorf_2.withdraw(50.0);
 		
-		
+		     
 		System.out.println(polimorf_1.getBalance());
 		System.out.println(polimorf_2.getBalance());
 
