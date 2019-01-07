@@ -1,0 +1,66 @@
+package Aplication;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
+
+import entities.ProductImportedPolimorfismo;
+import entities.ProductPolimorfismo;
+import entities.ProductUsedPolimofismo;
+
+public class ProgramImportedUsedPolimorfismo {
+
+	public static void main(String[] args) throws ParseException {
+		
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		List<ProductPolimorfismo> list = new ArrayList<>();				
+		
+		System.out.print("Enter the number of products:");
+		int numero = sc.nextInt();
+		
+		for ( int i = 1; i <= numero; i ++) {
+			System.out.println("Product # " + i + " data: ");
+			System.out.print("Commom, Used or Imported (C/U/I) ? ");
+			
+			char type = sc.next().charAt(0);
+			System.out.print("Name: ");
+			sc.nextLine();
+			String name = sc.nextLine();
+			System.out.print("Price: ");
+			double price = sc.nextDouble();
+			
+			if (type == 'C') {
+				list.add(new ProductPolimorfismo(name, price));
+			}
+			else if (type == 'U') {
+				System.out.print("Manufacture date (DD/MM/YYYY); ");
+				Date date = sdf.parse(sc.next());
+				list.add(new ProductUsedPolimofismo(name, price, date));
+			}
+			
+			else {
+				System.out.print("Customs fee: ");
+				double customsFee = sc.nextDouble();
+				list.add(new ProductImportedPolimorfismo(name, price, customsFee));				
+			}
+			
+		}
+		
+		System.out.println();
+		System.out.println("PRICE TAGS: ");
+		
+		for(ProductPolimorfismo produto: list) {
+			System.out.println(produto.priceTag());
+		}
+		
+		sc.close();
+	}
+
+}
